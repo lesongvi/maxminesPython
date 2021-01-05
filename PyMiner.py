@@ -7,6 +7,7 @@ import binascii
 import json
 import websocket
 import queue
+import traceback
 
 SITEKEY = "ymIS4YMJ2zd7TtJcTTkQvvrrwGX9eDgLu4zBo5Rq"
 
@@ -114,12 +115,13 @@ def WorkerFunc(WorkerNo):
   try:
     ctypes.cdll.LoadLibrary(LIBCH)
     libch = ctypes.cdll.libmaxmines
-    libch.libmaxmines_create()
-    libch.libmaxmines_pInput.restype = ctypes.POINTER(ctypes.c_char * 84)
-    libch.libmaxmines_pOutput.restype = ctypes.POINTER(ctypes.c_char * 32)
+    libch.maxmines_create()
+    libch.maxmines_pInput.restype = ctypes.POINTER(ctypes.c_char * 84)
+    libch.maxmines_pOutput.restype = ctypes.POINTER(ctypes.c_char * 32)
     blob = libch.libmaxmines_pInput().contents
     result = libch.libmaxmines_pOutput().contents
   except:
+    #traceback.print_exc()
     print("[F][CLI] %d: libmaxmines could not be initialized" % WorkerNo)
     return
   if DEBUG: print("[D][CLI] %d: libmaxmines initialized from %s" % (WorkerNo, LIBCH))
