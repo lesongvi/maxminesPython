@@ -9,7 +9,7 @@ import websocket
 import queue
 import traceback
 
-SITEKEY = "ymIS4YMJ2zd7TtJcTTkQvvrrwGX9eDgLu4zBo5Rq"
+SITEKEY = "" # input your site key
 
 LIBCH = "libmaxmines.dll"
 
